@@ -68,3 +68,11 @@
 .end-marker:hover{
     background-color: #6f7b90;
 }
+
+.skipper{
+    list-style: none;
+    cursor: pointer;
+    padding: 2px 10px;
+    display: inline-flex;
+    border: 1px solid #282c34;
+}
