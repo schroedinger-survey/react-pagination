@@ -53,24 +53,27 @@ const Pagination = (props) => {
         if (pages > displayRange) {
             const previous = <li key={0} className={endMarkerClass} onClick={goToPrevious}>{prevSign || "<<<"}</li>
             const next = <li key={keyProps} className={endMarkerClass} onClick={goToNext}>{nextSign || ">>>"}</li>
-            console.log(currentPage, pages);
 
-            if (skipElements && currentPage !== null && (currentPage !== pages) && startPagination >= 2) {
-                console.log("Show skip elements");
-
-                const toStart = <li key={keyProps + 1} className={inactivePage} onClick={() => {
+            if (skipElements && currentPage !== null) {
+                let toStart = <li key={keyProps + 1} className={inactivePage} onClick={() => {
                     sendPageToParent(1);
                     setStartPagination(1);
-                }}>1</li>
+                }}>1</li>;
 
-                const toEnd = <li key={keyProps + 2} className={inactivePage} onClick={() => {
+                let toEnd = <li key={keyProps + 2} className={inactivePage} onClick={() => {
                     sendPageToParent(pages)
-                }}>{pages}</li>
+                }}>{pages}</li>;
 
-                const skipElemOne = <li key={keyProps + 3} className={"skipper"}>...</li>
-                const skipElemTwo = <li key={keyProps + 4} className={"skipper"}>...</li>
+                let skipElemOne = <li key={keyProps + 3} className={"skipper"}>...</li>;
+                let skipElemTwo = <li key={keyProps + 4} className={"skipper"}>...</li>;
 
-                li = [previous, toStart, skipElemOne, ...li, skipElemTwo, toEnd, next];
+                if (startPagination >= displayRange - 1 && startPagination <= pages - (displayRange - 1)) {
+                    li = [previous, toStart, skipElemOne, ...li, skipElemTwo, toEnd, next];
+                } else if (startPagination >= displayRange - 1) {
+                    li = [previous, toStart, skipElemOne, ...li, next];
+                } else if (startPagination <= pages - (displayRange - 1)) {
+                    li = [previous, ...li, skipElemTwo, toEnd, next];
+                }
             } else {
                 li = [previous, ...li, next];
             }
