@@ -1,5 +1,5 @@
 import React from "react";
-import {createBaseList} from "./createBaseList";
+import {visibleList} from "./visibleList";
 
 export const createPageMarker = (props, setStartPagination, startPagination, currentPage, sendPageToParent, goToPrevious, goToNext) => {
     const {pages,
@@ -11,7 +11,7 @@ export const createPageMarker = (props, setStartPagination, startPagination, cur
         skipperElementClass,
         toEdgeClass} = props;
 
-    let li = createBaseList(props, startPagination, currentPage, sendPageToParent);
+    let li = visibleList(props, startPagination, currentPage, sendPageToParent);
 
     if (pages > displayRange) {
         const previous = <li key={"previous"} className={endMarkerClass} onClick={goToPrevious}>{prevSign || "<"}</li>
