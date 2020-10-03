@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './stuff/App.css';
 import Pagination from "./pagination/Pagination";
 import {test_data} from "./pagination/test_data";
@@ -6,27 +6,50 @@ import {test_data} from "./pagination/test_data";
 function App() {
     const data = test_data;
     const itemsPerPage = 2;
-
+    const [itemsList, setItemsList] = useState([]);
     const [page, setPage] = useState("");
 
     const setCurrentPaginationPage = (currentPage) => {
         setPage(currentPage);
+        fetchFunction(currentPage);
     }
 
     const fetchFunction = (index = 0) => {
-        return data.slice((index * (itemsPerPage)), ((index * itemsPerPage) + itemsPerPage));
+        setItemsList(data.slice((index * (itemsPerPage)), ((index * itemsPerPage) + itemsPerPage)));
+    }
+
+    useEffect(() => {
+        fetchFunction(0);
+    }, []);
+
+
+    const Data = () => {
+        while (itemsList.length < itemsPerPage) {
+            itemsList.push({text: "blankItem"});
+        }
+        const blankItem = (text) => {
+            if (text === "blankItem") {
+                return {color: "transparent"}
+            }
+        }
+        return (
+            <div style={{textAlign: "left", paddingLeft: "0"}}>
+                {itemsList.map((item, i) => (
+                    <p key={i} style={blankItem(item.text)}>{item.text}</p>
+                ))}
+            </div>
+        )
     }
 
     return (
         <div className="App">
-            <h1>{page}</h1>
+            {Data()}
             <Pagination itemsPerPage={itemsPerPage}
                         displayRange={3}
                         totalItemCount={test_data.length}
                         data={test_data}
                         activePage={"active-page-marker"}
                         inactivePage={"inactive-page-marker"}
-                        title={"Test Data:"}
                         prevSign={"<<<"}
                         nextSign={">>>"}
                         fetchFunction={fetchFunction}

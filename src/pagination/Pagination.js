@@ -7,46 +7,16 @@ const Pagination = (props) => {
         totalItemCount,
         activePage,
         inactivePage,
-        title,
         prevSign,
         nextSign,
-        fetchFunction,
         callBack} = props;
     const [startPagination, setStartPagination] = useState(1);
     const [currentPage, setCurrentPage] = useState(null);
-    const [itemsList, setItemsList] = useState([]);
     const pages = Math.ceil(totalItemCount / itemsPerPage);
-
-    const changePage = (index) => {
-        const items = fetchFunction(index - 1);
-        setItemsList(items);
-        setCurrentPage(index);
-    }
 
     useEffect(() => {
         setCurrentPage(1);
-        setItemsList(fetchFunction());
-    }, []);
-
-    const Data = () => {
-        while (itemsList.length < itemsPerPage) {
-            itemsList.push({text: "blankItem"});
-        }
-
-        const blankItem = (text) => {
-            if (text === "blankItem") {
-                return {color: "transparent"}
-            }
-        }
-
-        return (
-            <div style={{textAlign: "left", paddingLeft: "0"}}>
-                {itemsList.map((item, i) => (
-                    <p key={i} style={blankItem(item.text)}>{item.text}</p>
-                ))}
-            </div>
-        )
-    }
+    }, [])
 
     const goToPrevious = () => {
         if (startPagination - 1 >= 1) {
@@ -67,7 +37,6 @@ const Pagination = (props) => {
         for (let i = 0; i < (pages > displayRange ? displayRange : pages); i++) {
             li.push(<li className={startPagination + i === currentPage ? activePage : inactivePage} key={keyProps}
                         onClick={() => {
-                            changePage(startPagination + i);
                             sendPageToParent(startPagination + i)
                         }}>{startPagination + i}</li>)
             keyProps++
@@ -88,13 +57,12 @@ const Pagination = (props) => {
     }
 
     const sendPageToParent = (page) => {
-            callBack(page);
+            callBack(page-1);
+            setCurrentPage(page);
     }
 
     return (
         <div>
-            <p>{title}</p>
-            {Data()}
             {createPageMarker()}
         </div>
     )
