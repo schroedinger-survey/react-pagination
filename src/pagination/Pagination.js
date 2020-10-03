@@ -14,26 +14,35 @@ const Pagination = (props) => {
         prevSign,
         nextSign,
         skipElements,
-        callBack
+        callBack,
+        activeCenter
     } = props;
     const [startPagination, setStartPagination] = useState(1);
-    const [currentPage, setCurrentPage] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
     const pages = Math.ceil(totalItemCount / itemsPerPage);
 
     useEffect(() => {
-        setCurrentPage(1);
+        console.log(startPagination, currentPage);
     }, [])
 
     const goToPrevious = () => {
-        if (startPagination - 1 >= 1) {
+        if(activeCenter){
+            setCurrentPage(currentPage-1);
+            sendPageToParent(currentPage-1);
+        } else if (startPagination - 1 >= 1) {
             setStartPagination(startPagination - 1)
         }
+        console.log(startPagination, currentPage);
     }
 
     const goToNext = () => {
-        if (startPagination + displayRange <= pages) {
+        if(activeCenter){
+            setCurrentPage(currentPage+1);
+            sendPageToParent(currentPage+1);
+        } else if (startPagination + displayRange <= pages) {
             setStartPagination(startPagination + 1);
         }
+        console.log(startPagination, currentPage);
     }
 
     const createPageMarker = () => {
@@ -67,7 +76,6 @@ const Pagination = (props) => {
 
                 let skipElemOne = <li key={keyProps + 3} className={"skipper"}>...</li>;
                 let skipElemTwo = <li key={keyProps + 4} className={"skipper"}>...</li>;
-                console.log(startPagination);
                 if (startPagination >= displayRange - 1 && startPagination < (pages - (displayRange-1))) {
                     li = [previous, toStart, skipElemOne, ...li, skipElemTwo, toEnd, next];
                 } else if (startPagination >= (pages - (displayRange-1))) {
