@@ -44,9 +44,16 @@ const Pagination = (props) => {
 
     const goToNext = () => {
         if(activeCenter){
-            setCurrentPage(currentPage+1);
-            sendPageToParent(currentPage+1);
-            setStartPagination(currentPage);
+            if(currentPage+1 <= (pages-1)){
+                setCurrentPage(currentPage+1);
+                sendPageToParent(currentPage+1);
+                setStartPagination(currentPage);
+            } else {
+                setCurrentPage(pages);
+                sendPageToParent(pages);
+                setStartPagination(pages - (displayRange-1));
+            }
+
         } else if (startPagination + displayRange <= pages) {
             setStartPagination(startPagination + 1);
         }
