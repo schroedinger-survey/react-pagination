@@ -7,10 +7,10 @@ function App() {
     const data = test_data;
     const itemsPerPage = 2;
 
-    const [message, setMessage] = useState("");
+    const [page, setPage] = useState("");
 
-    const callbackParent = (childMessage) => {
-        setMessage(childMessage);
+    const setCurrentPaginationPage = (currentPage) => {
+        setPage(currentPage);
     }
 
     const fetchFunction = (index = 0) => {
@@ -19,7 +19,7 @@ function App() {
 
     return (
         <div className="App">
-            <h1>{message}</h1>
+            <h1>{page}</h1>
             <Pagination itemsPerPage={itemsPerPage}
                         displayRange={3}
                         totalItemCount={test_data.length}
@@ -30,7 +30,7 @@ function App() {
                         prevSign={"<<<"}
                         nextSign={">>>"}
                         fetchFunction={fetchFunction}
-                        callBack={callbackParent}/>
+                        callBack={setCurrentPaginationPage}/>
         </div>
     );
 }

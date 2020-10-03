@@ -68,7 +68,7 @@ const Pagination = (props) => {
             li.push(<li className={startPagination + i === currentPage ? activePage : inactivePage} key={keyProps}
                         onClick={() => {
                             changePage(startPagination + i);
-                            sendToParent(startPagination + i)
+                            sendPageToParent(startPagination + i)
                         }}>{startPagination + i}</li>)
             keyProps++
         }
@@ -87,7 +87,7 @@ const Pagination = (props) => {
         )
     }
 
-    const sendToParent = (page) => {
+    const sendPageToParent = (page) => {
             callBack(page);
     }
 
