@@ -5,7 +5,7 @@ import {test_data} from "./pagination/test_data";
 
 function App() {
     const data = test_data;
-    const itemsPerPage = 2;
+    const itemsPerPage = 4;
     const [itemsList, setItemsList] = useState([]);
 
     const setCurrentPaginationPage = (currentPage) => {
@@ -46,9 +46,12 @@ function App() {
                         displayRange={3}
                         totalItemCount={test_data.length}
                         activePage={"active-page-marker"}
+                        activePageSmallPagination={"small-marker active-page-marker-small"}
                         inactivePage={"inactive-page-marker"}
+                        inactivePageSmallPagination={"small-marker inactive-page-marker-small"}
                         prevSign={"<<<"}
                         nextSign={">>>"}
+                        endMarkerClass={"skip-marker"}
                         fetchFunction={fetchFunction}
                         callBack={setCurrentPaginationPage}/>
         </div>

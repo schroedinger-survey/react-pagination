@@ -16,14 +16,54 @@
     border: 1px solid #282c34;
     display: inline-flex;
 }
+.inactive-page-marker:hover{
+    background-color: #6f7b90;
+}
 
-.inactive-page-marker:first-child{
+.small-marker:first-child{
     border-radius: 4px 0 0 4px;
 }
-.inactive-page-marker:last-child{
+.small-marker:last-child{
     border-radius: 0 4px 4px 0;
 }
 
-.inactive-page-marker:hover{
+.active-page-marker-small{
+    list-style: none;
+    cursor: pointer;
+    border: 1px solid #282c34;
+    background-color: #282c34;
+    color: white;
+    font-weight: bold;
+    padding: 2px 10px;
+    display: inline-flex;
+}
+
+.inactive-page-marker-small{
+    list-style: none;
+    cursor: pointer;
+    padding: 2px 10px;
+    border: 1px solid #282c34;
+    display: inline-flex;
+}
+.inactive-page-marker_small:hover{
+    background-color: #6f7b90;
+}
+
+
+.skip-marker{
+    list-style: none;
+    cursor: pointer;
+    padding: 2px 10px;
+    border: 1px solid #282c34;
+    display: inline-flex;
+}
+
+.skip-marker:first-child{
+    border-radius: 4px 0 0 4px;
+}
+.skip-marker:last-child{
+    border-radius: 0 4px 4px 0;
+}
+.skip-marker:hover{
     background-color: #6f7b90;
 }

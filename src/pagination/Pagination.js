@@ -7,6 +7,9 @@ const Pagination = (props) => {
         totalItemCount,
         activePage,
         inactivePage,
+        activePageSmallPagination,
+        inactivePageSmallPagination,
+        endMarkerClass,
         prevSign,
         nextSign,
         callBack} = props;
@@ -35,7 +38,7 @@ const Pagination = (props) => {
         let keyProps = 1;
 
         for (let i = 0; i < (pages > displayRange ? displayRange : pages); i++) {
-            li.push(<li className={startPagination + i === currentPage ? activePage : inactivePage} key={keyProps}
+            li.push(<li className={((startPagination + i === currentPage) && pages > displayRange) ? activePage : ((startPagination + i === currentPage) && pages > displayRange) ? inactivePage : ((startPagination + i === currentPage) && pages < displayRange) ? activePageSmallPagination : inactivePageSmallPagination} key={keyProps}
                         onClick={() => {
                             sendPageToParent(startPagination + i)
                         }}>{startPagination + i}</li>)
@@ -43,8 +46,8 @@ const Pagination = (props) => {
         }
 
         if (pages > displayRange) {
-            const previous = <li key={0} className={inactivePage} onClick={goToPrevious}>{prevSign || "<<<"}</li>
-            const next = <li key={keyProps} className={inactivePage} onClick={goToNext}>{nextSign || ">>>"}</li>
+            const previous = <li key={0} className={endMarkerClass} onClick={goToPrevious}>{prevSign || "<<<"}</li>
+            const next = <li key={keyProps} className={endMarkerClass} onClick={goToNext}>{nextSign || ">>>"}</li>
             li = [previous, ...li, next];
         }
 
