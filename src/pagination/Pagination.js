@@ -29,6 +29,7 @@ const Pagination = (props) => {
         if(activeCenter){
             setCurrentPage(currentPage-1);
             sendPageToParent(currentPage-1);
+            setStartPagination(currentPage-2);
         } else if (startPagination - 1 >= 1) {
             setStartPagination(startPagination - 1)
         }
@@ -39,6 +40,7 @@ const Pagination = (props) => {
         if(activeCenter){
             setCurrentPage(currentPage+1);
             sendPageToParent(currentPage+1);
+            setStartPagination(currentPage);
         } else if (startPagination + displayRange <= pages) {
             setStartPagination(startPagination + 1);
         }
