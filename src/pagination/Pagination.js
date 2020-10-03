@@ -14,49 +14,38 @@ const Pagination = (props) => {
         endMarkerClass,
         skipElements,
         skipperElementClass,
-        callBack,
-        activeCenter
+        callBack
     } = props;
     const [startPagination, setStartPagination] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
+        console.log(pages);
         setCurrentPage(1);
     }, [])
 
     const goToPrevious = () => {
-        if(activeCenter){
-            if(currentPage-1 > 1){
-                setCurrentPage(currentPage-1);
-                sendPageToParent(currentPage-1);
-                setStartPagination(currentPage-2);
-            } else {
-                setCurrentPage(1);
-                sendPageToParent(1);
-                setStartPagination(1);
-            }
-        } else if (startPagination - 1 >= 1) {
-            setStartPagination(startPagination - 1)
+        if (currentPage - 1 > 1) {
+            setCurrentPage(currentPage - 1);
+            sendPageToParent(currentPage - 1);
+            setStartPagination(currentPage - 2);
+        } else {
+            setCurrentPage(1);
+            sendPageToParent(1);
+            setStartPagination(1);
         }
-        console.log(startPagination, currentPage);
     }
 
     const goToNext = () => {
-        if(activeCenter){
-            if(currentPage+1 <= (pages-1)){
-                setCurrentPage(currentPage+1);
-                sendPageToParent(currentPage+1);
-                setStartPagination(currentPage);
-            } else {
-                setCurrentPage(pages);
-                sendPageToParent(pages);
-                setStartPagination(pages - (displayRange-1));
-            }
-
-        } else if (startPagination + displayRange <= pages) {
-            setStartPagination(startPagination + 1);
+        if (currentPage + 1 <= (pages - 1)) {
+            setCurrentPage(currentPage + 1);
+            sendPageToParent(currentPage + 1);
+            setStartPagination(currentPage);
+        } else {
+            setCurrentPage(pages);
+            sendPageToParent(pages);
+            setStartPagination(pages - (displayRange - 1));
         }
-        console.log(startPagination, currentPage);
     }
 
     const createPageMarker = () => {
@@ -85,16 +74,17 @@ const Pagination = (props) => {
 
                 let toEnd = <li key={keyProps + 2} className={inactivePage} onClick={() => {
                     sendPageToParent(pages);
-                    setStartPagination(pages - (displayRange-1))
+                    setStartPagination(pages - (displayRange - 1))
                 }}>{pages}</li>;
 
                 let skipElemOne = <li key={keyProps + 3} className={skipperElementClass}>...</li>;
                 let skipElemTwo = <li key={keyProps + 4} className={skipperElementClass}>...</li>;
-                if (startPagination >= displayRange - 1 && startPagination < (pages - (displayRange-1))) {
+
+                if (startPagination >= displayRange - 1 && startPagination < (pages - (displayRange - 1))) {
                     li = [previous, toStart, skipElemOne, ...li, skipElemTwo, toEnd, next];
-                } else if (startPagination >= (pages - (displayRange-1))) {
+                } else if (startPagination >= (pages - (displayRange - 1))) {
                     li = [previous, toStart, skipElemOne, ...li, next];
-                } else{
+                } else {
                     li = [previous, ...li, skipElemTwo, toEnd, next];
                 }
             } else {

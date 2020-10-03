@@ -53,9 +53,8 @@ function App() {
                 prevSign={"<"}
                 nextSign={">"}
                 endMarkerClass={"end-marker"}
-                skipElements={true}
+                skipElements={false}
                 skipperElementClass={"skipper"}
-                activeCenter={true}
                 callBack={setCurrentPaginationPage}
             />
         </div>
