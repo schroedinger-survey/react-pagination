@@ -45,7 +45,6 @@ function App() {
             <Pagination itemsPerPage={itemsPerPage}
                         displayRange={3}
                         totalItemCount={test_data.length}
-                        data={test_data}
                         activePage={"active-page-marker"}
                         inactivePage={"inactive-page-marker"}
                         prevSign={"<<<"}
