@@ -5,20 +5,16 @@ const Pagination = (props) => {
     const {itemsPerPage,
         displayRange,
         totalItemCount,
-        data,
         activePage,
         inactivePage,
         title,
         prevSign,
-        nextSign} = props;
+        nextSign,
+        fetchFunction,} = props;
     const [startPagination, setStartPagination] = useState(1);
     const [currentPage, setCurrentPage] = useState(null);
     const [itemsList, setItemsList] = useState([]);
     const pages = Math.ceil(totalItemCount / itemsPerPage);
-
-    const fetchFunction = (index = 0) => {
-        return data.slice(index * itemsPerPage, ((index * itemsPerPage) + itemsPerPage));
-    }
 
     const changePage = (index) => {
         const items = fetchFunction(index - 1);
