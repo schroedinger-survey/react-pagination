@@ -10,7 +10,8 @@ const Pagination = (props) => {
         title,
         prevSign,
         nextSign,
-        fetchFunction,} = props;
+        fetchFunction,
+        callBack} = props;
     const [startPagination, setStartPagination] = useState(1);
     const [currentPage, setCurrentPage] = useState(null);
     const [itemsList, setItemsList] = useState([]);
@@ -65,7 +66,10 @@ const Pagination = (props) => {
 
         for (let i = 0; i < (pages > displayRange ? displayRange : pages); i++) {
             li.push(<li className={startPagination + i === currentPage ? activePage : inactivePage} key={keyProps}
-                        onClick={() => changePage(startPagination + i)}>{startPagination + i}</li>)
+                        onClick={() => {
+                            changePage(startPagination + i);
+                            sendToParent(startPagination + i)
+                        }}>{startPagination + i}</li>)
             keyProps++
         }
 
@@ -81,6 +85,10 @@ const Pagination = (props) => {
             </ul>
 
         )
+    }
+
+    const sendToParent = (page) => {
+            callBack(page);
     }
 
     return (
