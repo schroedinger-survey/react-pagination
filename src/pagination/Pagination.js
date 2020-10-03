@@ -61,17 +61,18 @@ const Pagination = (props) => {
                 }}>1</li>;
 
                 let toEnd = <li key={keyProps + 2} className={inactivePage} onClick={() => {
-                    sendPageToParent(pages)
+                    sendPageToParent(pages);
+                    setStartPagination(pages - (displayRange-1))
                 }}>{pages}</li>;
 
                 let skipElemOne = <li key={keyProps + 3} className={"skipper"}>...</li>;
                 let skipElemTwo = <li key={keyProps + 4} className={"skipper"}>...</li>;
-
-                if (startPagination >= displayRange - 1 && startPagination <= pages - (displayRange - 1)) {
+                console.log(startPagination);
+                if (startPagination >= displayRange - 1 && startPagination < (pages - (displayRange-1))) {
                     li = [previous, toStart, skipElemOne, ...li, skipElemTwo, toEnd, next];
-                } else if (startPagination >= displayRange - 1) {
+                } else if (startPagination >= (pages - (displayRange-1))) {
                     li = [previous, toStart, skipElemOne, ...li, next];
-                } else if (startPagination <= pages - (displayRange - 1)) {
+                } else{
                     li = [previous, ...li, skipElemTwo, toEnd, next];
                 }
             } else {
