@@ -2,7 +2,15 @@ import React, {useEffect, useState} from "react";
 import "./pagination.css";
 
 const Pagination = (props) => {
-    const {itemsPerPage, displayRange, totalItemCount, data, activePage, inactivePage} = props;
+    const {itemsPerPage,
+        displayRange,
+        totalItemCount,
+        data,
+        activePage,
+        inactivePage,
+        title,
+        prevSign,
+        nextSign} = props;
     const [startPagination, setStartPagination] = useState(1);
     const [currentPage, setCurrentPage] = useState(null);
     const [itemsList, setItemsList] = useState([]);
@@ -24,24 +32,21 @@ const Pagination = (props) => {
     }, []);
 
     const Data = () => {
-        while(itemsList.length < itemsPerPage){
+        while (itemsList.length < itemsPerPage) {
             itemsList.push({text: "blankItem"});
         }
 
         const blankItem = (text) => {
-            if (text === "blankItem"){
+            if (text === "blankItem") {
                 return {color: "transparent"}
             }
         }
 
         return (
-            <div>
-                <p>Data:</p>
-                <div>
-                    {itemsList.map((item, i) => (
-                        <p key={i} style={blankItem(item.text)}>{item.text}</p>
-                    ))}
-                </div>
+            <div style={{textAlign: "left", paddingLeft: "0"}}>
+                {itemsList.map((item, i) => (
+                    <p key={i} style={blankItem(item.text)}>{item.text}</p>
+                ))}
             </div>
         )
     }
@@ -63,26 +68,28 @@ const Pagination = (props) => {
         let keyProps = 1;
 
         for (let i = 0; i < (pages > displayRange ? displayRange : pages); i++) {
-            li.push(<li className={startPagination+i === currentPage ? activePage : inactivePage} key={keyProps}
+            li.push(<li className={startPagination + i === currentPage ? activePage : inactivePage} key={keyProps}
                         onClick={() => changePage(startPagination + i)}>{startPagination + i}</li>)
             keyProps++
         }
 
         if (pages > displayRange) {
-            const previous = <li key={0} className={inactivePage} onClick={goToPrevious}>{"<<<"}</li>
-            const next = <li key={keyProps} className={inactivePage} onClick={goToNext}>{">>>"}</li>
+            const previous = <li key={0} className={inactivePage} onClick={goToPrevious}>{prevSign || "<<<"}</li>
+            const next = <li key={keyProps} className={inactivePage} onClick={goToNext}>{nextSign || ">>>"}</li>
             li = [previous, ...li, next];
         }
 
         return (
-            <ul>
+            <ul style={{width: "50%", margin: "0 auto", padding: "0"}}>
                 {li}
             </ul>
+
         )
     }
 
     return (
-        <div style={{width: "30%", margin: "0 auto"}}>
+        <div>
+            <p>{title}</p>
             {Data()}
             {createPageMarker()}
         </div>
