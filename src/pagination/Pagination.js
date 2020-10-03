@@ -55,7 +55,7 @@ const Pagination = (props) => {
             const next = <li key={keyProps} className={endMarkerClass} onClick={goToNext}>{nextSign || ">>>"}</li>
             console.log(currentPage, pages);
 
-            if (skipElements && currentPage !== null && (currentPage !== pages) && startPagination === 2) {
+            if (skipElements && currentPage !== null && (currentPage !== pages) && startPagination >= 2) {
                 console.log("Show skip elements");
 
                 const toStart = <li key={keyProps + 1} className={inactivePage} onClick={() => {
