@@ -38,7 +38,7 @@ const Pagination = (props) => {
         let keyProps = 1;
 
         for (let i = 0; i < (pages > displayRange ? displayRange : pages); i++) {
-            li.push(<li className={((startPagination + i === currentPage) && pages > displayRange) ? activePage : ((startPagination + i === currentPage) && pages > displayRange) ? inactivePage : ((startPagination + i === currentPage) && pages < displayRange) ? activePageSmallPagination : inactivePageSmallPagination} key={keyProps}
+            li.push(<li className={((startPagination + i === currentPage) && pages > displayRange) ? activePage : (!(startPagination + i === currentPage) && pages > displayRange) ? inactivePage : ((startPagination + i === currentPage) && pages < displayRange) ? activePageSmallPagination : inactivePageSmallPagination} key={keyProps}
                         onClick={() => {
                             sendPageToParent(startPagination + i)
                         }}>{startPagination + i}</li>)

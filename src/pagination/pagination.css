@@ -50,7 +50,7 @@
 }
 
 
-.skip-marker{
+.end-marker{
     list-style: none;
     cursor: pointer;
     padding: 2px 10px;
@@ -58,12 +58,12 @@
     display: inline-flex;
 }
 
-.skip-marker:first-child{
+.end-marker:first-child{
     border-radius: 4px 0 0 4px;
 }
-.skip-marker:last-child{
+.end-marker:last-child{
     border-radius: 0 4px 4px 0;
 }
-.skip-marker:hover{
+.end-marker:hover{
     background-color: #6f7b90;
 }

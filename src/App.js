@@ -51,7 +51,7 @@ function App() {
                         inactivePageSmallPagination={"small-marker inactive-page-marker-small"}
                         prevSign={"<<<"}
                         nextSign={">>>"}
-                        endMarkerClass={"skip-marker"}
+                        endMarkerClass={"end-marker"}
                         fetchFunction={fetchFunction}
                         callBack={setCurrentPaginationPage}/>
         </div>
