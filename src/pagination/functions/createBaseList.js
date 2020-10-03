@@ -1,6 +1,7 @@
 import React from "react";
 
-export const createBaseList = (pages, displayRange, startPagination, currentPage, activePage, inactivePage, activePageSmallPagination, inactivePageSmallPagination, sendPageToParent) => {
+export const createBaseList = (props, startPagination, currentPage, sendPageToParent) => {
+    const{pages, displayRange, activePage, inactivePage, activePageSmallPagination, inactivePageSmallPagination} = props
     let li = [];
     for (let i = 0; i < (pages > displayRange ? displayRange : pages); i++) {
         li.push(<li

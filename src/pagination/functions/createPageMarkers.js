@@ -4,28 +4,26 @@ import {createBaseList} from "./createBaseList";
 export const createPageMarker = (props, setStartPagination, startPagination, currentPage, sendPageToParent, goToPrevious, goToNext) => {
     const {pages,
         displayRange,
-        activePage,
-        activePageSmallPagination,
-        inactivePage,
-        inactivePageSmallPagination,
         prevSign,
         nextSign,
         endMarkerClass,
         skipElements,
-        skipperElementClass} = props;
-    let li = createBaseList(pages, displayRange, startPagination, currentPage, activePage, inactivePage, activePageSmallPagination, inactivePageSmallPagination, sendPageToParent);
+        skipperElementClass,
+        toEdgeClass} = props;
+
+    let li = createBaseList(props, startPagination, currentPage, sendPageToParent);
 
     if (pages > displayRange) {
         const previous = <li key={"previous"} className={endMarkerClass} onClick={goToPrevious}>{prevSign || "<"}</li>
         const next = <li key={"next"} className={endMarkerClass} onClick={goToNext}>{nextSign || ">"}</li>
 
         if (skipElements && currentPage !== null) {
-            let toStart = <li key={"toStart"} className={inactivePage} onClick={() => {
+            let toStart = <li key={"toStart"} className={toEdgeClass} onClick={() => {
                 sendPageToParent(1);
                 setStartPagination(1);
             }}>1</li>;
 
-            let toEnd = <li key={"toEnd"} className={inactivePage} onClick={() => {
+            let toEnd = <li key={"toEnd"} className={toEdgeClass} onClick={() => {
                 sendPageToParent(pages);
                 setStartPagination(pages - (displayRange - 1))
             }}>{pages}</li>;

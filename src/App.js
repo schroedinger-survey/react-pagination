@@ -56,6 +56,7 @@ function App() {
                 skipElements={false}
                 skipperElementClass={"skipper"}
                 callBack={setCurrentPaginationPage}
+                toEdgeClass={"inactivePage"}
             />
         </div>
     );
