@@ -27,9 +27,15 @@ const Pagination = (props) => {
 
     const goToPrevious = () => {
         if(activeCenter){
-            setCurrentPage(currentPage-1);
-            sendPageToParent(currentPage-1);
-            setStartPagination(currentPage-2);
+            if(currentPage-1 > 1){
+                setCurrentPage(currentPage-1);
+                sendPageToParent(currentPage-1);
+                setStartPagination(currentPage-2);
+            } else {
+                setCurrentPage(1);
+                sendPageToParent(1);
+                setStartPagination(1);
+            }
         } else if (startPagination - 1 >= 1) {
             setStartPagination(startPagination - 1)
         }
