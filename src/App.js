@@ -6,7 +6,8 @@ import {test_data} from "./pagination/test_data";
 function App() {
     return (
         <div className="App">
-            <Pagination itemsPerPage={2} displayRange={3} totalItemCount={test_data.length} data={test_data}/>
+            <Pagination itemsPerPage={2} displayRange={3} totalItemCount={test_data.length} data={test_data}
+                        activePage={"active-page-marker"} inactivePage={"inactive-page-marker"}/>
         </div>
     );
 }

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-
-const liStyle = {listStyle: "none", float: "left", margin: "20px", cursor: "pointer"};
+import "./pagination.css";
 
 const Pagination = (props) => {
+    const {itemsPerPage, displayRange, totalItemCount, data, activePage, inactivePage} = props;
     const [startPagination, setStartPagination] = useState(1);
-    const {itemsPerPage, displayRange, totalItemCount, data} = props;
+    const [currentPage, setCurrentPage] = useState(null);
     const [itemsList, setItemsList] = useState([]);
     const pages = Math.ceil(totalItemCount / itemsPerPage);
 
@@ -15,9 +15,11 @@ const Pagination = (props) => {
     const changePage = (index) => {
         const items = fetchFunction(index - 1);
         setItemsList(items);
+        setCurrentPage(index);
     }
 
     useEffect(() => {
+        setCurrentPage(1);
         setItemsList(fetchFunction());
     }, []);
 
@@ -51,7 +53,6 @@ const Pagination = (props) => {
     }
 
     const goToNext = () => {
-        console.log(pages, startPagination + 1);
         if (startPagination + displayRange <= pages) {
             setStartPagination(startPagination + 1);
         }
@@ -62,14 +63,14 @@ const Pagination = (props) => {
         let keyProps = 1;
 
         for (let i = 0; i < (pages > displayRange ? displayRange : pages); i++) {
-            li.push(<li style={liStyle} key={keyProps}
+            li.push(<li className={startPagination+i === currentPage ? activePage : inactivePage} key={keyProps}
                         onClick={() => changePage(startPagination + i)}>{startPagination + i}</li>)
             keyProps++
         }
 
         if (pages > displayRange) {
-            const previous = <li key={0} style={liStyle} onClick={goToPrevious}>{"<<<"}</li>
-            const next = <li key={keyProps} style={liStyle} onClick={goToNext}>{">>>"}</li>
+            const previous = <li key={0} className={inactivePage} onClick={goToPrevious}>{"<<<"}</li>
+            const next = <li key={keyProps} className={inactivePage} onClick={goToNext}>{">>>"}</li>
             li = [previous, ...li, next];
         }
 
