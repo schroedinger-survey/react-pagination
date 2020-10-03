@@ -7,10 +7,8 @@ function App() {
     const data = test_data;
     const itemsPerPage = 2;
     const [itemsList, setItemsList] = useState([]);
-    const [page, setPage] = useState("");
 
     const setCurrentPaginationPage = (currentPage) => {
-        setPage(currentPage);
         fetchFunction(currentPage);
     }
 
