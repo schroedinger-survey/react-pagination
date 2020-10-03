@@ -52,7 +52,7 @@ const Pagination = (props) => {
         }
 
         return (
-            <ul style={{width: "50%", margin: "0 auto", padding: "0"}}>
+            <ul style={{margin: "0", padding: "0"}}>
                 {li}
             </ul>
 
