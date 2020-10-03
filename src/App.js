@@ -52,7 +52,7 @@ function App() {
                         prevSign={"<<<"}
                         nextSign={">>>"}
                         endMarkerClass={"end-marker"}
-                        skipElements={false}
+                        skipElements={true}
                         fetchFunction={fetchFunction}
                         activeCenter={true}
                         callBack={setCurrentPaginationPage}/>
