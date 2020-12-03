@@ -53,10 +53,10 @@ function App() {
                 prevSign={"<"}
                 nextSign={">"}
                 endMarkerClass={"end-marker"}
-                skipElements={false}
+                skipElements={true}
                 skipperElementClass={"skipper"}
                 callBack={setCurrentPaginationPage}
-                toEdgeClass={"inactivePage"}
+                toEdgeClass={"inactivePage inactive-page-marker"}
             />
         </div>
     );
